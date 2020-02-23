@@ -1,11 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
-
-export type User = {
-  id: number;
-  username: string;
-  password: string;
-};
+import { User } from '../enities/user.entity';
 
 @Injectable()
 export class UsersService {
