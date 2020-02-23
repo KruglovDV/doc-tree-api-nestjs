@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 import { User } from '../enities/user.entity';
+import { CreateUserDTO } from '../dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +24,20 @@ export class UsersService {
         password: 'guess',
       },
     ];
+  }
+
+  async createUser(createUserDTO: CreateUserDTO): Promise<User> {
+    const newUser = {
+      id: new Date().valueOf(),
+      username: createUserDTO.username,
+      password: createUserDTO.password,
+    };
+    this.users.push(newUser);
+    return newUser;
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return this.users;
   }
 
   async findOne(username: string): Promise<User | undefined> {
