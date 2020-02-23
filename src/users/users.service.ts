@@ -36,10 +36,6 @@ export class UsersService {
     return newUser;
   }
 
-  async getAllUsers(): Promise<User[]> {
-    return this.users;
-  }
-
   async findOne(username: string): Promise<User | undefined> {
     return _.find(this.users, { username });
   }
