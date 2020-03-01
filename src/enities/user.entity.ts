@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  readonly id: number;
+  readonly id?: number;
 
   @Column()
   readonly username: string;

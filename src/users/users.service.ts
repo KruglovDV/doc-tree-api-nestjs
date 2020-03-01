@@ -1,19 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import * as _ from 'lodash';
+import { Inject, Injectable } from '@nestjs/common';
 import { User } from '../enities/user.entity';
 import { CreateUserDTO } from '../dto/user.dto';
+import { IUsersRepository } from './users.repository.interface';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    @Inject('IUsersRepository')
+    private readonly usersRepository: IUsersRepository,
   ) {}
 
   async createUser(createUserDTO: CreateUserDTO): Promise<User> {
-    const newUser = {
+    const newUser: User = {
       username: createUserDTO.username,
       password: createUserDTO.password,
     };
@@ -22,6 +20,6 @@ export class UsersService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.usersRepository.findOne({ where: { username } });
+    return this.usersRepository.findOne(username);
   }
 }
