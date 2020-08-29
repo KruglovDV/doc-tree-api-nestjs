@@ -11,6 +11,7 @@ import { User } from './enities/user.entity';
     AuthModule,
     UsersModule,
     TypeOrmModule.forRoot({
+      // TODO get from environment configs
       type: 'postgres',
       host: 'localhost',
       port: 5432,
